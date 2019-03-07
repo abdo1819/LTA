@@ -88,18 +88,35 @@ class Subject(Base):
 # ?abdo ragab subject may have many departments why one-many relation
     department_id = Column(Integer , ForeignKey('department.id'))
     department = relationship(Department)
+
+    # you me not care about this it is just for implementing curd with session
+    # it is not important for database creation 
     location = relationship(
                         "Location",
                         secondary='location_subject',
                         back_populates="subjects")
 
-
+# table to relate location and subjects
 location_subject = Table('location_subject', Base.metadata,
     Column('subject_id', Integer, ForeignKey('subject.id')),
     Column('location_id', Integer, ForeignKey('location.id'))
 )    
 
+# to generate data base for sqlite (working)
 engine = create_engine('sqlite:///lte01_oracle.db')
- 
+#  to generate for oracle
+# engine = create_engine('oracle+cx_oracle://username:password@host:port/database')
+
 
 Base.metadata.create_all(engine)
+
+# to generate uml code plantuml use vscode extention
+# http://www.plantuml.com
+# if __name__ == '__main__':
+#     import codecs
+#     import sadisplay
+
+#     desc = sadisplay.describe(globals().values())
+
+#     with codecs.open('schema.plantuml', 'w', encoding='utf-8') as f:
+#         f.write(sadisplay.plantuml(desc))
