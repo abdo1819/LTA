@@ -10,18 +10,17 @@ Base = declarative_base()
 # basic data managment 3.1.1
 class Building(Base):
     '''
-    A- Building: - maintains the faculty building via storing the following information: - 
-        
-        ✓ Id: Sequential number i.e. 1,2,3…  
-        ✓ Code: - unique string that identifies the building i.e. A, B, C … 
-        ✓ Description: - string describes the building i.e. Civil Eng Dept 
+    # Building: - maintains the faculty building via storing the following information: -   
+    ✓ Id: Sequential number i.e. 1,2,3…  
+    ✓ Code: - unique string that identifies the building i.e. A, B, C … 
+    ✓ Description: - string describes the building i.e. Civil Eng Dept 
 
 
-    # argue (abdo):?? no need for availability here location availability cover this
-    # 
-    # added v_01
+    ## added 
     * availability for inicating if building is available as unavialble means you can't 
         add any thing to building locations 
+    <!-- > (abdo):?? no need for availability here location availability cover this  -->
+
     '''
     __tablename__ ='building'
     id = Column(Integer, primary_key = True)
@@ -31,15 +30,16 @@ class Building(Base):
 
 class Floor(Base):
     '''
-    B- Building-Floor: - maintains the faculty building floors via storing the following information:
+    # Building-Floor: - 
+        maintains the faculty building floors via storing the following information:
         ✓ Id: Sequential number i.e. 1,2,3…
         ✓ Code: - unique string that identifies the sub-building i.e. A-1, A-2 …
         ✓ Description: - string describes the building i.e. 1st floor, 2nd floor 
 
-    # added
+    ## added
     * availability for inicating if floor is available
     ?? no need for it location give this info
-    ## relations
+    ### relations
     * building_id - floor has one to one relation with building 
     '''
     __tablename__ = 'floor'
@@ -63,31 +63,39 @@ class Floor(Base):
 
 
 class Location(Base):
-    '''
-    Space/location Type: - maintains the faculty location/halls via storing the following information: 
+    '''    
+    # Space/location Type: - 
+        maintains the faculty location/halls via storing the following information: 
         ✓ Id: Sequential number i.e. 1,2,3…  
         ✓ Code: - unique string that identifies the location i.e. LAB … 
         ✓ Description: - string describes the location i.e. Computer Lab  
         ✓ Color: - code that discriminate that space among other spaces. 
-    # added
+    ## added
     * availability:  for inicating if location is functioning 
     ?? do we need this
     * regular_capacity: location capacity during regular days for better locating
     * exam_capacity: location capacity at exam time ( location can hold less at exam )
+
     ## relations
 
     Floor: floor_id whitch one contain this location
-    ?? confirmation
+
+    > confirm  __
+
     component_location:
     component: what available component for location EX:AC/board ..
-    
+
+    > confirm  __
+
     location_subject:
-    subjects: associate subject to location ((* note period is defined 
-                                                in subject no need for it in relation))
-    
-    ??confirmation ? does role describe which location user can edit/add
+    subjects: associate subject to location ((* note slot is defined 
+    in subject no need for it in relation))
+
+    > confirm  __
+
     role_locations
     role: roles which give permesion to view or edit in location 
+    > ? does role describe which location user can edit/add
 
     '''
     __tablename__ ='location'
@@ -134,14 +142,15 @@ class Location(Base):
 
 class Component(Base):
     '''
-    > confirm  __
+    # component
+    > confirm  added
 
     (*new generated) discribes component can be added to location :
-        * id unique number for each component
-        * name component name EX: AC / board ...
-
-        #relation:
-        # loction: locations has this component  many to many relation   
+    * id :  unique number for each component
+    * name : component name i.e: AC / board ...
+    ## relation:
+    loction: locations has this component  
+    type many to many relation   
     '''
     __tablename__ = 'component'
     id = Column(Integer, primary_key=True)
@@ -161,7 +170,8 @@ component_location =Table('component_location' ,Base.metadata,
 # 
 class Department(Base):
     '''
-     Departments: - maintains the following information for the department: - 
+    # Departments: - 
+        maintains the following information for the department: - 
         ✓ Id: Sequential number i.e. 1,2,3…  
         ✓ Code: - unique string that identifies the department i.e. CVL, ELEC … 
         ✓ Name: - Department name i.e. architectural Engineering 
@@ -169,8 +179,11 @@ class Department(Base):
 
     # relations
     location_id : location holds this department
-    ?? created relation was one to one do way need many building for same department 
-    ?? or can two departement share same location
+
+    > ?? do we need many building for same department 
+
+    > ?? can two departement share same building
+
     '''
     __tablename__ ='department'
 
@@ -185,7 +198,8 @@ class Department(Base):
 
 class Staff(Base):
     '''
-    Staff: - enables the user to add staff with the following data set: - 
+    # Staff: - 
+        enables the user to add staff with the following data set: - 
         ✓ Id: Sequential number i.e. 1,2,3…  
         ✓ Name: - Staff member’s name. 
         ✓ Department: - staff member department which is to be selected from 
@@ -198,7 +212,7 @@ class Staff(Base):
                     ▪ Assistant lecturer 
                     ▪ Demonstrator 
 
-    ?? is staff users for system who can login for viewing there data or it is public accessed
+    > ?? is staff users for system who can login for viewing there data or it is public accessed
     '''
     __tablename__ = 'staff'
     id = Column(Integer, primary_key=True)
@@ -210,16 +224,19 @@ class Staff(Base):
    
 class Subject(Base):
     '''
-     Subjects: - enables the user to add courses with the following data set: - 
-     ✓ Id: Sequential number i.e. 1,2,3…  
-     ✓ Code: - course code. 
-     ✓ Name: - Subject name. 
-     ✓ Lecture Time: - lecture time slot in Hours unit i.e. 1,2,3  ?? what does it mean in houres
-     ✓ Department: - staff member department which is to be selected from list of departments (Screen D section 3.1.1). 
-     ✓ preferred location type: one or many types would be selected from the list defined in subsection 3.1.1.C. i.e. CCE-108 course needs computer Lab so that we need to define such information right here. 
-    
-    # ?abdo ragab slot when lecture will be heled 
-    # ?abdo ragab subject may share many departments why one-many relation    
+    # Subjects: -
+        enables the user to add courses with the following data set: - 
+        ✓ Id: Sequential number i.e. 1,2,3…  
+        ✓ Code: - course code. 
+        ✓ Name: - Subject name. 
+        ✓ Lecture Time: - lecture time slot in Hours unit i.e. 1,2,3  
+        ✓ Department: - staff member department which is to be selected from list of departments (Screen D section 3.1.1). 
+        ✓ preferred location type: one or many types would be selected from the list defined in subsection 3.1.1.C. i.e. CCE-108 course needs computer Lab so that we need to define such information right here. 
+
+    > ? what do you mean by houres unit in Lecture Time isn't they just slots
+
+    > ?subject may share many departments 
+    *( one department to many subject relation)
     '''
     __tablename__ = 'subject'
     id= Column(Integer, primary_key=True)
@@ -247,14 +264,17 @@ location_subject = Table('location_subject', Base.metadata,
 
 class User(Base):
     '''
-    B- Users: - this screen maintains users’ information in insert/update/delete 
-                    manner with the following attributes: - 
-    ✓ Id: serial 
-    ✓ Name: user login name 
-    ✓ Full name: user full name as four tokens first, middle, last and family name. 
-    ✓ Email: to be used later to send required document to the user. 
-    ✓ password 
-    ✓ Role: - dropdown list to assign a role to the user.  
+    # Users: - 
+    no change
+
+        this screen maintains users’ information in insert/update/delete 
+        manner with the following attributes: - 
+        ✓ Id: serial 
+        ✓ Name: user login name 
+        ✓ Full name: user full name as four tokens first, middle, last and family name. 
+        ✓ Email: to be used later to send required document to the user. 
+        ✓ password 
+        ✓ Role: - dropdown list to assign a role to the user.  
     '''
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
@@ -267,12 +287,13 @@ class User(Base):
 
 class Role(Base):
     '''
-    A- Role: - this screen creates a role for user describing its job 
-                i.e. admin, employee… 
-    The screen maintains the following info. about the role: - 
-    ✓ Id: Serial 
-    ✓ Name: role name. 
-    ✓ Description: role description.
+    # Role: - 
+        this screen creates a role for user describing its job  i.e. admin,employee… 
+        The screen maintains the following info. about the role: - 
+        ✓ Id: Serial 
+        ✓ Name: role name. 
+        ✓ Description: role description.
+    > ? does role describe which location user can edit/add
     '''
     __tablename__ = 'role'
     id = Column(Integer, primary_key=True)

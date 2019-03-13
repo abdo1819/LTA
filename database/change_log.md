@@ -1,3 +1,5 @@
+> ? > adding table for component/features of location
+
 > ? does role describe which location user can edit/add
 
 > ?? do we need many buildings for same department
@@ -24,6 +26,7 @@
 * availability for inicating if building is available as unavialble means you can't 
     add any thing to building locations 
 <!-- > (abdo):?? no need for availability here location availability cover this  -->
+
 
 # Building-Floor: - 
     maintains the faculty building floors via storing the following information:
@@ -71,13 +74,13 @@ role_locations
 role: roles which give permesion to view or edit in location 
 > ? does role describe which location user can edit/add
 
-## component
-> confirm  __
+# component
+> confirm  added
 
 (*new generated) discribes component can be added to location :
 * id :  unique number for each component
 * name : component name i.e: AC / board ...
-### relation:
+## relation:
  loction: locations has this component  
  type many to many relation   
 
