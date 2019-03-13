@@ -1,19 +1,21 @@
-# script using 
+# intro
+this is implemtaion of database for project using sqlalchemy witch support multi database provider
 
-edit line for with your user name and pass and database / or use sql lite no edit reqierd
+# using script
 
+to create sqlite database 
+
+> python3 database_setup.py
+
+for other types
+* edit this line with your info for oracle database
 ```python
 engine = create_engine('oracle+cx_oracle://username:password@host:port/database')
 ```
-
-you may use other db provider to create your engine
+* you may use other db provider 
+### to create your engine
 https://docs.sqlalchemy.org/en/latest/core/engines.html
 
-
-# further info about sqlalchemy and using it
-https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
-
-# database using 
 ## setup enviroment 
 * oracle database
 * python3
@@ -23,3 +25,5 @@ https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
 * sadisplay -> create diagram for database
 > pip3 install sqlalchemy cx_oracle sadisplay
 
+# further info about sqlalchemy and using it
+https://docs.sqlalchemy.org/en/latest/orm/tutorial.html
