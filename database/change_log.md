@@ -82,7 +82,8 @@ No system is for one faculty.
 > ? does role describe which location user can edit/add
 
 
-# Building: - maintains the faculty building via storing the following information: -   
+# Building: - 
+    maintains the faculty building via storing the following information: -   
     ✓ Id: Sequential number i.e. 1,2,3…  
     ✓ Code: - unique string that identifies the building i.e. A, B, C … 
     ✓ Description: - string describes the building i.e. Civil Eng Dept 
