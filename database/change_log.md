@@ -1,3 +1,69 @@
+# v 01
+
+## .3 role related to dapartment directly 
+#TODO
+it is more logical 
+
+
+## .2 remove availabilty from building and floor
+```
+*(abdo ragab)
+    remove availabilty from building and floor not necessry as location contain this info 
+```
+> to confirm (ahmed fayez)
+
+
+## .1 adding many to many relation dep_location
+> ?? do we need many buildings for same department
+
+> ?? is tere direct relation with location
+
+> ?? can two departement share same building
+```
+Building to dept relation is many to many.
+Dept may holds many buildings.
+And as u said one building may my shared by many dept.
+
+for simplicity make it building mapping not floor mapping and for each department we select home building
+```
+
+> ? Do we need to add faculty and University
+```
+No system is for one faculty.
+```
+
+## .-1 added questions 
+#TODO
+``` add tables for
+> ?? table for grade 
+
+> ?? table for devision
+
+> ?? sections
+> * students number
+> * default locations (many to many)
+> * name
+
+> ?? relate sections to subjects
+```
+
+
+
+## .0 from previose
+> ? does role describe which location user can edit/add
+
+> ? make role related to deparment directly
+
+> ? > adding table for component/features of location
+
+> ?? are staff users for system who can login for viewing there data or it is public accessed
+
+> ? what do you mean by houres unit in Lecture Time isn't they just slots
+
+
+
+
+# v 00
 > ? > adding table for component/features of location
 
 > ? does role describe which location user can edit/add

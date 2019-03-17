@@ -7,6 +7,14 @@ from sqlalchemy import create_engine
 Base = declarative_base()
 
 
+
+# # TODO> ?? table for grade 
+# # TODO> ?? table for devision
+# # TODO> ?? sections
+
+# # TODO> ?? relate sections to subjects
+# # TODO> relate role department directly
+
 # basic data managment 3.1.1
 class Building(Base):
     '''
@@ -20,14 +28,19 @@ class Building(Base):
     * availability for inicating if building is available as unavialble means you can't 
         add any thing to building locations 
     <!-- > (abdo):?? no need for availability here location availability cover this  -->
-
     '''
     __tablename__ ='building'
     id = Column(Integer, primary_key = True)
     code =Column(String(40), nullable = False)
     description =Column(String(150), nullable = False)
-    availability = Column(Boolean, nullable = False)
+    # v01.2
+    # availability = Column(Boolean, nullable = False)
 
+    # many to many relation v01.1
+    departments = relationship('Department',
+                        secondary= 'department_building',
+                        back_populates='buildings')
+   
 class Floor(Base):
     '''
     # Building-Floor: - 
@@ -47,7 +60,8 @@ class Floor(Base):
     id = Column(Integer, primary_key=True)
     code = Column(String(250), nullable=False)
     description =Column(String(150), nullable = False)
-    availability = Column(Boolean, nullable = False)   
+    # v 01.2
+    # availability = Column(Boolean, nullable = False)   
     
     # v_02 argue code coulmn conatian information about floor number
     # 
@@ -178,11 +192,8 @@ class Department(Base):
         ✓ Home Building: - the department’s home building which is to be selected from list of buildings (Screen A section 3.1.1). 
 
     # relations
-    location_id : location holds this department
+    locations : locations holds this department
 
-    > ?? do we need many building for same department 
-
-    > ?? can two departement share same building
 
     '''
     __tablename__ ='department'
@@ -191,10 +202,20 @@ class Department(Base):
     code = Column(String(250), nullable=False)
     name =Column(String(150), nullable = False)
 
-    # department building
-    building_id = Column(Integer , ForeignKey('building.id'))
-    building = relationship(Building)
+    # relation changed to many to many change_log v01.1
+    # department buildings
+    buildings = relationship('Building',
+                            secondary= 'department_building',
+                            back_populates='departments')
+
+
+
    
+department_building = Table('department_building', Base.metadata,
+    Column('department_id', Integer, ForeignKey('department.id')),
+    Column('building_id', Integer, ForeignKey('building.id'))
+)    
+
 
 class Staff(Base):
     '''

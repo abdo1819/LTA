@@ -3,30 +3,26 @@
 skinparam defaultFontName Courier
 
 Class Building {
-    INTEGER      ★ id          
-    BOOLEAN      ⚪ availability
-    VARCHAR[40]  ⚪ code        
-    VARCHAR[150] ⚪ description 
+    INTEGER      ★ id         
+    VARCHAR[40]  ⚪ code       
+    VARCHAR[150] ⚪ description
+    +            departments  
 }
 
 Class Floor {
-    INTEGER      ★ id          
-    INTEGER      ☆ building_id 
-    BOOLEAN      ⚪ availability
-    VARCHAR[250] ⚪ code        
-    VARCHAR[150] ⚪ description 
-    +            building      
+    INTEGER      ★ id         
+    INTEGER      ☆ building_id
+    VARCHAR[250] ⚪ code       
+    VARCHAR[150] ⚪ description
+    +            building     
 }
 
 Class Location {
     INTEGER      ★ id              
     INTEGER      ☆ floor_id        
-    BOOLEAN      ⚪ aircondition    
     BOOLEAN      ⚪ availability    
-    BOOLEAN      ⚪ board           
     VARCHAR[250] ⚪ code            
     INTEGER      ⚪ color           
-    BOOLEAN      ⚪ datashow        
     VARCHAR[150] ⚪ description     
     INTEGER      ⚪ exam_capacity   
     INTEGER      ⚪ regular_capacity
@@ -48,11 +44,15 @@ Class component_location {
 }
 
 Class Department {
-    INTEGER      ★ id         
-    INTEGER      ☆ building_id
-    VARCHAR[250] ⚪ code       
-    VARCHAR[150] ⚪ name       
-    +            building     
+    INTEGER      ★ id     
+    VARCHAR[250] ⚪ code   
+    VARCHAR[150] ⚪ name   
+    +            buildings
+}
+
+Class department_building {
+    INTEGER ☆ building_id  
+    INTEGER ☆ department_id
 }
 
 Class Staff {
@@ -107,7 +107,9 @@ component_location <--o Component: component_id
 
 component_location <--o Location: location_id
 
-Department <--o Building: building_id
+department_building <--o Department: department_id
+
+department_building <--o Building: building_id
 
 Staff <--o Department: department_id
 
